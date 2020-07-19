@@ -70,8 +70,9 @@ class OrderBOImplTest {
     @Test
     void cancelOrder_Should_Cancel_Order() throws SQLException, BOException {
         //given
-        when(orderDAOMock.read(new Integer(anyInt()))).thenReturn(any(Order.class));
-        when(orderDAOMock.update(any(Order.class))).thenReturn(1);
+        Order order = new Order();
+        when(orderDAOMock.read(new Integer(anyInt()))).thenReturn(order);
+        when(orderDAOMock.update(order)).thenReturn(1);
 
         //when
         boolean result = orderBOImpl.cancelOrder(new Integer(anyInt()));
@@ -85,8 +86,9 @@ class OrderBOImplTest {
     @Test
     void cancelOrder_Should_Not_Cancel_Order() throws SQLException, BOException {
         //given
-        when(orderDAOMock.read(new Integer(anyInt()))).thenReturn(any(Order.class));
-        when(orderDAOMock.update(any(Order.class))).thenReturn(0);
+        Order order = new Order();
+        when(orderDAOMock.read(new Integer(anyInt()))).thenReturn(order);
+        when(orderDAOMock.update(order)).thenReturn(0);
 
         //when
         boolean result = orderBOImpl.cancelOrder(new Integer(anyInt()));
@@ -100,7 +102,6 @@ class OrderBOImplTest {
     @Test
     void cancelOrder_Should_Throw_BOExceptionOnRead() throws SQLException, BOException {
         //given
-        Order order = new Order();
         when(orderDAOMock.read(new Integer(anyInt()))).thenThrow(SQLException.class);
 
         //when
@@ -111,8 +112,9 @@ class OrderBOImplTest {
     @Test
     void cancelOrder_Should_Throw_BOExceptionOnUpdate() throws SQLException, BOException {
         //given
-        when(orderDAOMock.read(new Integer(anyInt()))).thenReturn(any(Order.class));
-        when(orderDAOMock.update(any(Order.class))).thenThrow(SQLException.class);
+        Order order = new Order();
+        when(orderDAOMock.read(new Integer(anyInt()))).thenReturn(order);
+        when(orderDAOMock.update(order)).thenThrow(SQLException.class);
 
         //when
         //then
